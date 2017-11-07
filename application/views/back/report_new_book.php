@@ -1,5 +1,5 @@
 <?php if (isset($input)): ?>
- มี...............
+ มี.
 <?php endif; ?>
 <div class="row">
   <div class="col-lg-12 col-md-12">
