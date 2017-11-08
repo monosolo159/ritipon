@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <div class="form-group ">
-                            <label for="cemail" class="control-label col-lg-2">ชั้นวาง <span class="required">*</span></label>
+                            <label for="cemail" class="control-label col-lg-2">ชั้นวาง </label>
                             <div class="col-lg-10">
                                 <?php echo $bookOne[0]['shelf_name'] ?>
                             </div>

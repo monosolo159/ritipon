@@ -178,7 +178,13 @@ class Home extends CI_Controller {
 
 	public function pageDetail(){
 		$id = $this->uri->segment(3);
-		$member_id = $_SESSION['MEMBER_ID'];
+		if (isset($_SESSION['MEMBER_ID'])) {
+			$member_id = $_SESSION['MEMBER_ID'];
+		} else {
+			$member_id = 0;
+		}
+
+
 		$checkReadBook = $this->Bookmodel->readLaterCheck($member_id,$id);
 		if (count($checkReadBook)<1) {
 			$input['book_id'] = $id;
