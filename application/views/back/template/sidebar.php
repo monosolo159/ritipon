@@ -9,7 +9,7 @@
       </div>
 
       <!--logo start-->
-      <a href="<?php echo site_url() ?>" class="logo">หนังสือส่วนบุคคล<span class="lite">ออนไลน์</span></a>
+      <a href="<?php echo site_url('Admin') ?>" class="logo">หนังสือส่วนบุคคล<span class="lite">ออนไลน์</span></a>
       <!--logo end-->
 
       <div class="top-nav notification-row">
