@@ -64,7 +64,7 @@
                        <th>จำนวนหนังสือ</th>
                     </tr>
                     <?php foreach ($memberList as $bkey): ?>
-                      <tr>
+                      <tr onclick="window.location.href = '<?php echo site_url('Admin/memberEditForm/'.$bkey['member_id']) ?>';">
                          <td><?php echo $bkey['member_id'] ?></td>
                          <td><?php echo $bkey['member_fname'].' '.$bkey['member_lname'] ?></td>
                          <td><?php echo $bkey['member_address'] ?></td>

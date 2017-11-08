@@ -290,7 +290,7 @@ public function myBookComingRead($id){
       $input['date_end'] = null;
     }
     $this->db->distinct();
-    $this->db->select('*,(select count(book_id) from book where book.member_id = member.member_id) as book_all');
+    $this->db->select('member.member_id,member_fname,member_lname,member_address,member_regdate,member_tel,member_username,(select count(book_id) from book where book.member_id = member.member_id) as book_all');
     $this->db->where('book_date  >=', $input['date_start'].' 00:00:00');
     $this->db->where('book_date  <=', $input['date_end'].' 23:59:59');
     $this->db->from('member');
