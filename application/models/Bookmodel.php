@@ -98,7 +98,10 @@ public function myBookComingRead($id){
   public function readLater($input){
     // $this->db->insert('book_read_later',$input);
     $this->db->where('book_read_later_id',$input['book_read_later_id'])->update('book_read_later',$input);
-
+  }
+  public function readLaterInsert($input){
+    $this->db->insert('book_read_later',$input);
+    // $this->db->where('book_read_later_id',$input['book_read_later_id'])->update('book_read_later',$input);
   }
   public function bookComment($id){
     return $this->db

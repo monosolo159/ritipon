@@ -184,10 +184,8 @@ class Home extends CI_Controller {
 			$input['book_id'] = $id;
 			$input['member_id'] = $member_id;
 			$input['book_read_later_status'] = 0;
-			$this->Bookmodel->readLater($input);
+			$this->Bookmodel->readLaterInsert($input);
 		}
-
-
 		$config = array();
 		$config['full_tag_open'] = "<ul class='pagination'>";
 		$config['full_tag_close'] ="</ul>";
