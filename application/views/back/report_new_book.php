@@ -1,12 +1,9 @@
-<?php if (isset($input)): ?>
- มี.
-<?php endif; ?>
 <div class="row">
   <div class="col-lg-12 col-md-12">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h2><i class="fa fa-flag-o red"></i><strong>หนังสือใหม่</strong>
-          <?php if (isset($input)): ?>
+          <?php if (count($input)>0): ?>
             ตั้งแต่วันที่ <?php echo $input['date_start'] ?> ถึงวันที่ <?php echo $input['date_end'] ?>
           <?php endif; ?>
         </h2>
@@ -50,7 +47,7 @@
           </div>
 
 
-          <?php if (isset($input)): ?>
+          <?php if (count($input)>0): ?>
 
             <div class="card">
 
@@ -67,10 +64,9 @@
                        <th>โรงพิมพ์</th>
                        <th>สมาชิก</th>
                        <th>วันที่</th>
-
                     </tr>
                     <?php foreach ($bookList as $bkey): ?>
-                      <tr>
+                      <tr onclick="window.location.href = '<?php echo site_url('Admin/bookView/'.$bkey['book_id']) ?>';">
                          <td><?php echo $bkey['book_code'] ?></td>
                          <td><?php echo $bkey['book_name'] ?></td>
                          <td><?php echo $bkey['book_all_page'] ?></td>

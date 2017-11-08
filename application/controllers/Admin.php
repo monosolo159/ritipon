@@ -400,9 +400,6 @@ class Admin extends CI_Controller {
 
 
 	public function reportNewBook(){
-		$input['date_start'] = "";
-		$input['date_end'] = "";
-
 		$input = $this->input->post();
 		$bookList = $this->Bookmodel->reportNewBook($input);
 		$value = array(
@@ -415,18 +412,24 @@ class Admin extends CI_Controller {
 		$this->LoadPage($value);
 	}
 	public function reportSumRead(){
+		$input = $this->input->post();
+		$bookList = $this->Bookmodel->reportSumRead($input);
 		$value = array(
 			'Result' => array(
-				// 'pageOne' => $pageOne
+				'input' => $input,
+				'bookList' => $bookList
 			),
 			'View' => 'back/report_sum_read'
 		);
 		$this->LoadPage($value);
 	}
 	public function reportMemberBook(){
+		$input = $this->input->post();
+		$memberList = $this->Bookmodel->reportMemberBook($input);
 		$value = array(
 			'Result' => array(
-				// 'pageOne' => $pageOne
+				'input' => $input,
+				'memberList' => $memberList
 			),
 			'View' => 'back/report_member_book'
 		);

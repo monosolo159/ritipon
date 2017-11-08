@@ -246,17 +246,60 @@ public function myBookComingRead($id){
 
 
 
+
+
   public function reportNewBook($input){
-    return $this->db
-    ->select('*,(select count(book_page_id) from book_page where book.book_id = book_page.book_id) as book_all_page,(select count(book_read_id) from book_read where book_read.book_id = book.book_id) as book_all_read,(select sum(book_like_score) from book_like where book_like.book_id = book.book_id)/(select count(book_like_id) from book_like where book_like.book_id = book.book_id) as book_score')
-    // ->where('book_date  >=', $input['date_start'].' 00:00:00')
-    // ->where('book_date  <=', $input['date_end'].' 23:59:59')
-    ->join('member','member.member_id = book.member_id','left')
-    ->join('category','category.category_id = book.category_id','left')
-    ->join('shelf','shelf.shelf_id = book.shelf_id','left')
-    ->get('book')
-    ->result_array();
+    if(count($input)==0){
+      $input['date_start'] = null;
+      $input['date_end'] = null;
+    }
+    $this->db->distinct();
+    $this->db->select('*,(select count(book_page_id) from book_page where book.book_id = book_page.book_id) as book_all_page,(select count(book_read_id) from book_read where book_read.book_id = book.book_id) as book_all_read,(select sum(book_like_score) from book_like where book_like.book_id = book.book_id)/(select count(book_like_id) from book_like where book_like.book_id = book.book_id) as book_score');
+    $this->db->where('book_date  >=', $input['date_start'].' 00:00:00');
+    $this->db->where('book_date  <=', $input['date_end'].' 23:59:59');
+    $this->db->from('book');
+    $this->db->join('member','member.member_id = book.member_id','left');
+    $this->db->join('category','category.category_id = book.category_id','left');
+    $this->db->join('shelf','shelf.shelf_id = book.shelf_id','left');
+    $this->db->order_by('book_date','desc');
+
+    $query = $this->db->get()->result_array();
+    return $query;
   }
 
+  public function reportSumRead($input){
+    if(count($input)==0){
+      $input['date_start'] = null;
+      $input['date_end'] = null;
+    }
+    $this->db->distinct();
+    $this->db->select('*,(select count(book_page_id) from book_page where book.book_id = book_page.book_id) as book_all_page,(select count(book_read_id) from book_read where book_read.book_id = book.book_id) as book_all_read,(select sum(book_like_score) from book_like where book_like.book_id = book.book_id)/(select count(book_like_id) from book_like where book_like.book_id = book.book_id) as book_score');
+    $this->db->where('book_date  >=', $input['date_start'].' 00:00:00');
+    $this->db->where('book_date  <=', $input['date_end'].' 23:59:59');
+    $this->db->from('book');
+    $this->db->join('member','member.member_id = book.member_id','left');
+    $this->db->join('category','category.category_id = book.category_id','left');
+    $this->db->join('shelf','shelf.shelf_id = book.shelf_id','left');
+    $this->db->order_by('book_all_read','desc');
+    $query = $this->db->get()->result_array();
+    return $query;
+  }
+  public function reportMemberBook($input){
+    if(count($input)==0){
+      $input['date_start'] = null;
+      $input['date_end'] = null;
+    }
+    $this->db->distinct();
+    $this->db->select('*,(select count(book_id) from book where book.member_id = member.member_id) as book_all');
+    $this->db->where('book_date  >=', $input['date_start'].' 00:00:00');
+    $this->db->where('book_date  <=', $input['date_end'].' 23:59:59');
+    $this->db->from('member');
+    $this->db->join('book','member.member_id = book.member_id','left');
+    $this->db->join('category','category.category_id = book.category_id','left');
+    $this->db->join('shelf','shelf.shelf_id = book.shelf_id','left');
+    $this->db->order_by('book_all','desc');
+    $query = $this->db->get()->result_array();
+    return $query;
+  }
 
 }
